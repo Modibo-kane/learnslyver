@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'navigator.dart'; // On importe votre fichier home_page
 
 void main() {
   runApp(const MyApp());
@@ -8,52 +8,17 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // MaterialApp DOIT être le premier widget retourné
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Flutter demo",
       theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
+      // On dit à l'application de démarrer sur MyHomePage
       home: const MyHomePage(),
-    );
-  }
-}
-
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body:CustomScrollView(
-        slivers: [
-          SliverPadding(
-              padding:EdgeInsets.all(8),
-              sliver: SliverList(delegate: SliverChildBuilderDelegate(
-                  (context, i)=> ListTile(
-                      title: Text("Coucou $i"),
-                    ),
-                    childCount: 12
-
-              ),
-
-              ),
-          ),
-          SliverList(delegate: SliverChildBuilderDelegate(
-                  (context, i){
-                print("coucou $i");
-                return ListTile(
-                  title: Text("Hello $i"),
-                );
-              }
-          ),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -31,39 +31,27 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       body:CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(
-            child: /*Column(
-              children: List.generate(100, (e) {
-                print("e = $e");
-                return Container(
-                  height: 250,
-                  color: Colors.pink,
-                  margin: EdgeInsets.all(8),
-                  child: Center(
-                    child: Text(e.toString()),
-                  ),
-                );
-              }
+          SliverPadding(
+              padding:EdgeInsets.all(8),
+              sliver: SliverList(delegate: SliverChildBuilderDelegate(
+                  (context, i)=> ListTile(
+                      title: Text("Coucou $i"),
+                    ),
+                    childCount: 12
+
               ),
-            ),*/ // non performant car elle charge tout en un coup
-            Container(
-              height: 128,
-              color: Colors.blue,
-              child: Center(
-                child: Text("Mon header"),
+
               ),
-            )
           ),
           SliverList(delegate: SliverChildBuilderDelegate(
-              (context, index){
-                print("elemet: $index");
+                  (context, i){
+                print("coucou $i");
                 return ListTile(
-                title: Text("element: $index"),
-              );
-                },
-            childCount: 250
+                  title: Text("Hello $i"),
+                );
+              }
           ),
-          )
+          ),
         ],
       ),
     );

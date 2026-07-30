@@ -6,8 +6,26 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Contenu de votre page Instagram
-    return const Center(
-      child: Text("Bienvenue sur Accueil"),
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            title: Text("Mon AppBar"),
+            backgroundColor: Colors.lightGreen,
+            centerTitle: true,
+            pinned: true,
+          ),
+          SliverList(
+              delegate: SliverChildBuilderDelegate(
+                  (context, index){
+                    return ListTile(
+                      title: Text("Element de liste: $index"),
+                    );
+                  }, childCount: 40,
+              )
+          )
+        ],
+      ),
     );
   }
 }

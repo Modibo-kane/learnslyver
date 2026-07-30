@@ -9,6 +9,43 @@ class InstagramExplore extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
+          SliverAppBar(
+            title: const Text(
+              "Instagram",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                fontSize: 26
+              ),
+            ),
+            pinned: true, // Garde la barre visible en haut si vous le souhaitez
+
+            // 1. On utilise flexibleSpace au lieu de backgroundColor
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                // 2. On crée le dégradé linéaire
+                gradient: LinearGradient(
+                  // Direction du dégradé (de haut à droite vers bas à gauche)
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  // Les couleurs officielles d'Instagram
+                  colors: [
+                    Color(0xFF405DE6), // Bleu/Violet
+                    Color(0xFF5851DB), // Violet clair
+                    Color(0xFF833AB4), // Violet foncé
+                    Color(0xFFC13584), // Rose
+                    Color(0xFFE1306C), // Rose clair
+                    Color(0xFFFD1D1D), // Rouge
+                    Color(0xFFF56040), // Orange
+                    Color(0xFFF77737), // Orange clair
+                    Color(0xFFFCAF45), // Jaune
+                    Color(0xFFFFDC80), // Jaune très clair
+                  ],
+                ),
+              ),
+            ),
+          ),
+
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.fromLTRB(16, 50, 16, 10),

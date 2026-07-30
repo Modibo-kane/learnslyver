@@ -8,12 +8,18 @@ class HomePage extends StatelessWidget {
     // Contenu de votre page Instagram
     return Scaffold(
       body: CustomScrollView(
+        physics: BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
             title: Text("Mon AppBar"),
             backgroundColor: Colors.lightGreen,
             centerTitle: true,
             pinned: true,
+            collapsedHeight: kToolbarHeight,
+            expandedHeight: 200,
+            floating: true,
+            snap: true,
+            stretch: true,
           ),
           SliverList(
               delegate: SliverChildBuilderDelegate(

@@ -22,66 +22,50 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
+      body:CustomScrollView(
         slivers: [
-          /*SliverToBoxAdapter(
-            child: Column(
-              children: [
-                Text("Est ce que cela fonctionne ? ")
-              ],
-            ),
-          /* ici on a vue que pour metttre un Column dans un sliver, il faut
-          le mettre dans un SliverToBoxAdapter d'abord sinon il y aura une
-          erreur fatal .*/
-          )*/
-
-          /*SliverToBoxAdapter(
-              child:ListView.builder(
-                itemCount: 25,
-                itemBuilder: ((context, index){
-                  ListTile(title: Text("index: $index"),
-                  );
-                }),
-              )
-          )
-          /*ici il est dit que vue que un SliverToBoxAdapter a une taille infini,
-           et quand on essaye d'y mettre une ListView.builder qui
-           repartie ses enfant en fonction de l'espace de son parent,
-            il va se produire une erreur ded calcule car
-            le ListView.builder essaye de calculer un espace infini
-            a partager entre ces enfant*/
-          */
-          //solution 1
-          /*SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) => ListTile(
-                  title: Text("index: $index")),
-              childCount: 25
-            ),
-          ),*/
-
-          // solution 2 cas de force majeur ( depannage )
           SliverToBoxAdapter(
-              child:ListView.builder(
-                shrinkWrap: true, // forcer a prendre la taille
-                  physics: NeverScrollableScrollPhysics(), // desacativer le sroll interne (celui de ListView.builder )
-                itemCount: 25,
-                itemBuilder: ((context, index)=>
-                  ListTile(title: Text("index: $index"),
-                  )
-                ),
-              )
+            child: /*Column(
+              children: List.generate(100, (e) {
+                print("e = $e");
+                return Container(
+                  height: 250,
+                  color: Colors.pink,
+                  margin: EdgeInsets.all(8),
+                  child: Center(
+                    child: Text(e.toString()),
+                  ),
+                );
+              }
+              ),
+            ),*/ // non performant car elle charge tout en un coup
+            Container(
+              height: 128,
+              color: Colors.blue,
+              child: Center(
+                child: Text("Mon header"),
+              ),
+            )
+          ),
+          SliverList(delegate: SliverChildBuilderDelegate(
+              (context, index){
+                print("elemet: $index");
+                return ListTile(
+                title: Text("element: $index"),
+              );
+                },
+            childCount: 250
+          ),
           )
         ],
-      )
+      ),
     );
   }
 }
-
-

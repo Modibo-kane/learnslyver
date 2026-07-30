@@ -29,28 +29,57 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
-        // Direction du scroll
-        scrollDirection: Axis.vertical,
-        // Pré-rendu c'est a dire ce qui est visible ou le sera prochainement par l'utilisateur
-        scrollCacheExtent: ScrollCacheExtent.pixels(250),
-      //   Point de depart
-        anchor: 1,
-      //   mettre en place les slivers
         slivers: [
-          const SliverAppBar(
-            title: Text("Le viewport voit tout "),
-          ),
-          SliverList(delegate: SliverChildBuilderDelegate((context, index){
-            print("Construction de l'élement $index");
-            return ListTile(
-              title: Text("Element numéro: $index"),
-            );
-          },
-            childCount: 200 // le nomvre de sliver que j'affiche.
-          ),
-          ),
+          /*SliverToBoxAdapter(
+            child: Column(
+              children: [
+                Text("Est ce que cela fonctionne ? ")
+              ],
+            ),
+          /* ici on a vue que pour metttre un Column dans un sliver, il faut
+          le mettre dans un SliverToBoxAdapter d'abord sinon il y aura une
+          erreur fatal .*/
+          )*/
+
+          /*SliverToBoxAdapter(
+              child:ListView.builder(
+                itemCount: 25,
+                itemBuilder: ((context, index){
+                  ListTile(title: Text("index: $index"),
+                  );
+                }),
+              )
+          )
+          /*ici il est dit que vue que un SliverToBoxAdapter a une taille infini,
+           et quand on essaye d'y mettre une ListView.builder qui
+           repartie ses enfant en fonction de l'espace de son parent,
+            il va se produire une erreur ded calcule car
+            le ListView.builder essaye de calculer un espace infini
+            a partager entre ces enfant*/
+          */
+          //solution 1
+          /*SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) => ListTile(
+                  title: Text("index: $index")),
+              childCount: 25
+            ),
+          ),*/
+
+          // solution 2 cas de force majeur ( depannage )
+          SliverToBoxAdapter(
+              child:ListView.builder(
+                shrinkWrap: true, // forcer a prendre la taille
+                  physics: NeverScrollableScrollPhysics(), // desacativer le sroll interne (celui de ListView.builder )
+                itemCount: 25,
+                itemBuilder: ((context, index)=>
+                  ListTile(title: Text("index: $index"),
+                  )
+                ),
+              )
+          )
         ],
-      ),
+      )
     );
   }
 }

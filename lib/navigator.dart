@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_slyver/ateliers/atelierB.dart';
 import 'package:learn_slyver/pages/home_page.dart';
 import 'ateliers/atelierA.dart'; // On importe la page InstagramExplore
 
@@ -16,6 +17,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Widget> _ecrans = [
     const HomePage(),
     const InstagramExplore(),
+    const SpotifyPage()
   ];
 
   void _onItemTapped(int index) {
@@ -38,7 +40,11 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.camera_alt_outlined),
-            label: "Instagramx",
+            label: "Instagram",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.music_note_outlined),
+            label: "Spotify",
           )
         ],
       ),

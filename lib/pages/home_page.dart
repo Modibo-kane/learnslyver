@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
         physics: BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
-            title: Text("Mon AppBar"),
+            // title: Text("Mon AppBar"),
             backgroundColor: Colors.lightGreen,
             centerTitle: true,
             pinned: true,
@@ -20,6 +20,15 @@ class HomePage extends StatelessWidget {
             floating: true,
             snap: true,
             stretch: true,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text("Ici on est flexible", style: TextStyle(color: Colors.white),),
+              background: Image.asset("assets/blogBg.webp", fit: BoxFit.cover,),
+              stretchModes: [
+                // StretchMode.blurBackground,
+                StretchMode.zoomBackground,
+                StretchMode.fadeTitle
+              ],
+            ),
           ),
           SliverList(
               delegate: SliverChildBuilderDelegate(

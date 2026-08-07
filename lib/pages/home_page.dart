@@ -54,7 +54,7 @@ class HomePageState extends State<HomePage> {
             title: Text("SLiverAppBar"),
           ),
           SliverPersistentHeader(
-              delegate: HeaderDelegate(title: "Teste"),
+              delegate: HeaderDelegate(title: "Teste", min: 24, max: 500 ),
             pinned: true,
           ),
           SliverFillRemaining()
@@ -67,24 +67,37 @@ class HomePageState extends State<HomePage> {
 
 class HeaderDelegate extends SliverPersistentHeaderDelegate{
   final String title;
+  final double max;
+  final double min;
 
-  HeaderDelegate({required this.title});
+  HeaderDelegate({
+    required this.title,
+    required this.max,
+    required this.min
+  });
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    final opacity = (shrinkOffset / maxExtent).clamp(0, 1);
     return Container(
-      color: Colors.lightBlueAccent,
-      child: Center(child: Text(title),),
+      color: Colors.lightGreenAccent.withAlpha((opacity * 255).toInt()),
+      child: Center(
+        child: Column(
+          children: [
+            Text(shrinkOffset.toString())
+          ],
+        ),
+      ),
     );
   }
 
   @override
   // TODO: implement maxExtent
-  double get maxExtent => 200;
+  double get maxExtent => max;
 
   @override
   // TODO: implement minExtent
-  double get minExtent => 150;
+  double get minExtent => min;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {

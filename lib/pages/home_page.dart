@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -78,13 +80,19 @@ class HeaderDelegate extends SliverPersistentHeaderDelegate{
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    final opacity = (shrinkOffset / maxExtent).clamp(0, 1);
+    final double percent = (shrinkOffset / (maxExtent - minExtent)).clamp(0, 1);
+
+    final double fontSize = lerpDouble(32, 18, percent)!;
+    final double iconSize = lerpDouble(50, 24, percent)!;
     return Container(
-      color: Colors.lightGreenAccent.withAlpha((opacity * 255).toInt()),
+      color: Colors.lightGreen,
       child: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
           children: [
-            Text(shrinkOffset.toString())
+            Icon(Icons.star, color: Colors.white, size: iconSize,),
+            Text("LERP", style: TextStyle(color: Colors.white, fontSize: fontSize),)
           ],
         ),
       ),

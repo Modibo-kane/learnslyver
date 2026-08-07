@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:learn_slyver/ateliers/atelierB.dart';
 import 'package:learn_slyver/pages/home_page.dart';
-import 'ateliers/atelierA.dart'; // On importe la page InstagramExplore
+import 'ateliers/atelierA.dart';
+import 'ateliers/atelierC.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -17,7 +18,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Widget> _ecrans = [
     const HomePage(),
     const InstagramExplore(),
-    const SpotifyPage()
+    const SpotifyPage(),
+    const Airbnb()
   ];
 
   void _onItemTapped(int index) {
@@ -33,6 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
+        type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -45,6 +48,10 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.music_note_outlined),
             label: "Spotify",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.house_outlined),
+            label: "AirBnb",
           )
         ],
       ),

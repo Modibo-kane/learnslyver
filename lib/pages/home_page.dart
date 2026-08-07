@@ -50,33 +50,45 @@ class HomePageState extends State<HomePage> {
         physics: BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
-            title:  _isCollapsed ? Text("Mon AppBar") : null,
-            backgroundColor: Colors.lightGreen,
-            centerTitle: true,
             pinned: true,
-            collapsedHeight: kToolbarHeight,
-            expandedHeight: 250,
-            floating: true,
-            snap: true,
-            stretch: true,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text("Ici on est flexible", style: TextStyle(color: Colors.white),),
-              background: Image.asset("assets/blogBg.webp", fit: BoxFit.cover,),
-              stretchModes: [
-                // StretchMode.blurBackground,
-                StretchMode.zoomBackground,
-                StretchMode.fadeTitle
-              ],
-            ),
+            title: Text("SLiverAppBar"),
           ),
-          SliverFillRemaining(
-            // c'est un element qui permet de remplir l'espace restant
-            child: Center(
-              child: Text(_isCollapsed ? "Ouvert": "Femer"),
-            ),
-          )
+          SliverPersistentHeader(
+              delegate: HeaderDelegate(title: "Teste"),
+            pinned: true,
+          ),
+          SliverFillRemaining()
         ],
       ),
     );
   }
+}
+
+
+class HeaderDelegate extends SliverPersistentHeaderDelegate{
+  final String title;
+
+  HeaderDelegate({required this.title});
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      color: Colors.lightBlueAccent,
+      child: Center(child: Text(title),),
+    );
+  }
+
+  @override
+  // TODO: implement maxExtent
+  double get maxExtent => 200;
+
+  @override
+  // TODO: implement minExtent
+  double get minExtent => 150;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    return false;
+  }
+
 }
